@@ -1,0 +1,234 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+  --main-ux-color: #ae7436;
+  --main-devback-color: #8c36ae;
+  --main-devfront-color: #36A9AE;
+  --main-devback-image: linear-gradient(#b23781, #9a2465);
+  --main-devfront-image: linear-gradient(#37ADB2, #329CA0);
+  --main-ux-image: -webkit-radial-gradient(top left, ellipse, #d5bd45 0%, transparent), linear-gradient(to bottom, #FA715F, #FA715F 50%, #db2c11);
+  --main-ux-image: -webkit-radial-gradient(top left, ellipse, #d58145 0%, transparent), linear-gradient(to bottom, #FA715F, #FA715F 50%, #db2c11);
+  --main-font:'Assistant', sans-serif;
+
+}
+
+html {
+  font-size: 14px; 
+  font-family: var(--main-font);
+}
+
+.hide{
+  display: none;
+}
+
+header{
+  padding:2%;
+  border-bottom:1px solid #ccc;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  text-align: center;
+  background-color: #FFDEE9;
+  background-image: linear-gradient(0deg, #fae8ee 0%, #dffffe 100%);
+}
+
+h1, h2{
+  color:#033649;
+  margin-bottom:10px;
+}
+
+header form select, header form button, header form input {
+  padding:4px;
+  font-family: var(--main-font);
+}
+
+
+header form button {
+  padding-right:15px;
+  padding-left:15px;
+}
+
+.noCategoryMessage{
+  color:#DB1174;
+  font-size: 2em;
+}
+
+
+/******************** Colorboxes ***************/
+
+
+#devCategorys{
+ display:flex;
+ justify-content: center; 
+ margin:1% 1% 0 1%;
+}
+
+#devCategorys div{
+  padding:0.5%;
+  margin:0.5%;
+  border-radius: 5px;
+  width:90px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+}
+
+.categoryColorBox{
+  border-radius: 5px;
+  width:90px;
+}
+
+.uxColor{
+  background-color: var(--main-ux-color);
+  background: var(--main-ux-image);
+  color:#fff;
+}
+
+.devBackColor{
+  background-color: var(--main-devback-color);
+  background-image: var(--main-devback-image);
+  color:#fff;
+}
+
+.devFrontColor{
+  color:#fff;
+  background-color: var(--main-devfront-color);
+  background-image: var(--main-devfront-image);
+}
+
+
+
+/**** MAIN ****/
+
+.wrapper{
+  width:97%;
+  margin:20px auto;
+  display:flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.wrapper h2{
+  text-align: center;
+}
+
+.wrapper section{
+  padding:1%;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  width:350px;
+  border-radius: 5px;
+}
+
+/**** TASKS ****/
+
+.task{
+  padding:1em;
+  border-radius: 5px;
+  width:98%;
+  place-self: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  display:flex;
+  flex-direction: column;
+  background-color:#B6D6CC;
+}
+
+.tasktext, .assigned, .assignBtn{
+  margin:5px 0 5px 0;
+  /* font-weight: 600; */
+}
+
+.task div:last-child {
+  display:flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+.task button {
+  align-self:flex-end;
+  margin-top:10px;
+  padding:1.5% 0% 1.5% 0%;
+  width:30%;
+  cursor: pointer;
+  background-color: #fff;;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  font-family: var(--main-font);
+}
+
+
+.task button:hover,
+.task button:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.task button:hover {
+  transform: translateY(-1px);
+}
+
+.task button:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+
+
+.assignform{
+  height: 30px;
+  margin:0;
+  margin-bottom: 10px;;
+  padding:0;
+}
+
+.wrapper input{
+  padding:1%;
+  height:100%;
+  font-family: 'Assistant', sans-serif;
+}
+
+.assignBtn{
+  margin-left:3px !important;
+}
+
+
+.assigned::before {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block; 
+  text-rendering: auto;
+  font-variant: normal;
+  line-height: 1;
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 1.2em;
+  margin:0 7px 0 5px;
+  content: "\f02b";
+  content: "\f044";
+  /* content: "\f4fe"; Person Gear*/ 
+  /* content: "\f007"; Person*/
+  content: "\f507"; /* Person tag*/
+  content: "\f4fc"; /* Person check*/
+}
+
+
+.assigned{
+  border-radius: 5px;
+  /* text-align: center; */
+  padding:5px;
+  font-weight:400;
+  background-color: #eadee3c3;
+  color: #2c3e50;
+}
+
+
+
+

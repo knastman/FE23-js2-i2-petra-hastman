@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/3a14b5ad60.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="./main.js" type="module"></script>
+    <title>JS2 - Scrum Board</title>
+</head>
+<body>
+  <header>
+    <!-- <a href="./"> -->
+    <h1>Scrum Board</h1>
+    <!-- </a> -->
+    <div id="addTasksContainer" class="addTasksContainer">
+      <form id="addTasksForm">
+        <input type="text" placeholder="Enter task" id="addTask" name="addTask">
+        <select id="devCategory" name="Task category">
+          <option value="" selected>Choose dev category</option>
+          <option value="ux">UX</option>
+          <option value="dev backend">Dev backend</option>
+          <option value="dev frontend">Dev frontend</option>
+        </select>
+        <button id="addTaskBtn" type="submit">Add</button>
+      </form> 
+     </div>
+     <div id="devCategorys">
+      <div class="uxColor">UX</div>
+      <div class="devBackColor">Dev backend</div>
+      <div class="devFrontColor">Dev frontend</div>
+     </div>
+    <div id="errorContainer" class="hide">Errormessage</div>
+  </header>
+  <main>
+    <div class="wrapper">
+
+      <section id="toDo">
+        <h2>To Do</h2>
+        <!-- Tasks here -->
+      </section>
+
+      <section id="inProgress">
+        <h2>In progress</h2>
+        <!-- Tasks here -->
+      </section>
+
+      <section id="done">
+        <h2>Done</h2>
+        <!-- Tasks here --> 
+      </section>
+
+    </div>
+  </main>
+</body>
+</html>
