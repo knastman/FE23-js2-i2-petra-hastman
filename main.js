@@ -1,4 +1,4 @@
-import { displayTasks, createAppendAddClass, clearAll, displayError, clearAndGetTasks} from "./modules/displayTasks.js";
+import { displayTasks, displayError, clearAndGetTasks} from "./modules/displayTasks.js";
 import { getTasks, postTask } from "./modules/fetchFunctions.js";
 
 const form = document.querySelector('#addTasksForm');
@@ -23,13 +23,10 @@ form.addEventListener('submit', (event) => {
     task: task 
   }
 
-  form.reset();
-  // noCategoryMessage.innerHTML = '';
-
   postTask(newTask)
     .then(clearAndGetTasks)
 
-  
+  form.reset();
 })
 
 

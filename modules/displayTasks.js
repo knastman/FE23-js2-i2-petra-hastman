@@ -1,21 +1,13 @@
 import { getTasks, assignNameToTask, changeTaskStatus, deleteTask} from "./fetchFunctions.js";
 
-
-const toDoSection = document.querySelector('#toDo');
-const inProgressSection = document.querySelector('#inProgress');
-const doneSection = document.querySelector('#done');
-
+const toDoTasksContainer = document.querySelector('#toDoTasks');
+const inProgressTasksContainer = document.querySelector('#inProgressTasks');
+const doneTasksContainer = document.querySelector('#doneTasks');
 
 /*********************************
   Display Tasks
 **********************************/
 
-export function displayTasks(tasks){
-  for(const id in tasks){
-    const task = tasks[id];
-    displayTask(task, id);
-  }
-}
 
 export function clearAndGetTasks(){
   clearAll();
@@ -24,16 +16,23 @@ export function clearAndGetTasks(){
     .catch(displayError)
 }
 
+export function displayTasks(tasks){
+  for(const id in tasks){
+    const task = tasks[id];
+    displayTask(task, id);
+  }
+}
+
 function displayTask(task, id){
   const taskCard = document.createElement('article'); 
   const taskTextContainer = createAppendAddClass('div', taskCard, 'tasktext');
-
+ 
   const status = task.status; 
-  let section;
+  let tasksContainer;
   if (status == "to do"){
-    section = toDoSection;
+    tasksContainer = toDoTasksContainer;
     const assignForm = createAssignForm(taskCard);
-
+    
     assignForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const nameInput = assignForm.querySelector('#assignName');
@@ -44,11 +43,11 @@ function displayTask(task, id){
         status: "in progress"
       }
 
-      assignForm.reset();
-   
       assignNameToTask(id, newAssignee)
         .then(clearAndGetTasks)
         .catch(displayError)
+
+      assignForm.reset();
  
     });
 
@@ -56,13 +55,13 @@ function displayTask(task, id){
 
 
   if (status == "in progress"){
-    section = inProgressSection;
-    const taskButtonContainer = createAppendAddClass('div', taskCard, 'taskbuttonconatiner');
-    const assignedToContainer = createAppendAddClass('p', taskButtonContainer, 'assigned');
-    const doneBtn = createAppendAddClass('button', taskButtonContainer, 'taskBtns' );
+    tasksContainer = inProgressTasksContainer;
+    const taskAssignedContainer = createAppendAddClass('div', taskCard, 'assigned');
+    const doneBtnContainer = createAppendAddClass('div', taskCard, 'doneContainer');
+    const doneBtn = createAppendAddClass('button', doneBtnContainer,'doneBtn' );
     doneBtn.innerText = 'Done';
 
-    assignedToContainer.innerText = task.assigned;
+    taskAssignedContainer.innerText = task.assigned;
 
     doneBtn.addEventListener('click', (event) => {
       event.preventDefault();
@@ -80,24 +79,18 @@ function displayTask(task, id){
 
 
   if (status == "done"){
-    section = doneSection;
+    tasksContainer = doneTasksContainer;
     const taskButtonContainer = createAppendAddClass('div', taskCard);
-    const removeBtn = createAppendAddClass('button', taskButtonContainer, 'taskBtns');
+    const removeBtn = createAppendAddClass('button', taskButtonContainer, 'deleteBtn');
     removeBtn.innerText = 'Remove';
 
     removeBtn.addEventListener('click', () => {
       deleteTask(id)
-      .then(()=>{
-        clearAll();
-        getTasks()
-        .then(displayTasks)
-        .catch(displayError);
-      })
+      .then(clearAndGetTasks)
+      .catch(displayError)
     })
 
-
   }
-
 
   let cssCategory;
   if (task.category == "ux"){
@@ -113,9 +106,8 @@ function displayTask(task, id){
   taskCard.classList.add('task', cssCategory);
   taskCard.setAttribute("id", id);
   taskTextContainer.innerText = task.task;
-  section.append(taskCard);
+  tasksContainer.append(taskCard);
 }
-
 
 
 
@@ -151,19 +143,11 @@ export function createAppendAddClass(type, container, className){
   return el;
 }
 
+
 export function clearAll (){
-  toDoSection.innerHTML = '';
-  inProgressSection.innerHTML = '';
-  doneSection.innerHTML = '';
-
-  // const toDoChildren = document.querySelector('');
-
-  const toDoHeader = createAppendAddClass('h2', toDoSection);
-  toDoHeader.innerText = 'To do'; 
-  const inProgressHeader = createAppendAddClass('h2', inProgressSection);
-  inProgressHeader.innerText = 'In progress'; 
-  const doneHeader = createAppendAddClass('h2', doneSection);
-  doneHeader.innerText = 'Done'; 
+  toDoTasksContainer.innerHTML = '';
+  inProgressTasksContainer.innerHTML = '';
+  doneTasksContainer.innerHTML = '';
 }
 
 /********************************************
