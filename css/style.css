@@ -25,8 +25,15 @@ html {
   display: none;
 }
 
+#errorContainer{
+  color:#db2c11;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
 header{
-  padding:2%;
+  /* padding:2%; */
+  padding:20px;
   border-bottom:1px solid #ccc;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   text-align: center;
@@ -66,8 +73,8 @@ header form button {
 }
 
 #devCategorys div{
-  padding:0.5%;
   margin:0.5%;
+  padding:7px 3px;
   border-radius: 5px;
   width:90px;
   box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
@@ -216,7 +223,7 @@ header form button {
   /* content: "\f4fe"; Person Gear*/ 
   /* content: "\f007"; Person*/
   content: "\f507"; /* Person tag*/
-  content: "\f4fc"; /* Person check*/
+  content: "\f4fc"; /*Person check*/
 }
 
 

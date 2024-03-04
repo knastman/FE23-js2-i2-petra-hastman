@@ -1,4 +1,4 @@
-const baseUrl = 'https://scrum-board-4eb67-default-rtdb.europe-west1.firebasedatabase.app/tasks'
+const baseUrl = 'https://scrum-board-4eb67-default-rtdb.europe-west1.firebasedatabase.app/taskssss'
 const header = {
     "Content-type": "application/json; charset=UTF-8"
 }
@@ -11,19 +11,34 @@ async function getTasks(){
   const url = baseUrl+'.json';
 
   const res = await fetch(url);
-
-  if(res.ok){ 
+  console.log('res');
+  console.log(res);
+  
+  if (res.ok){
     const tasks = await res.json();
-    if(tasks.total_results == 0){
-      throw 404;
-    }
+    console.log('tasks');
+    console.log(tasks);
     return tasks;
   }
-  else throw 'error';
+  throw res.status;
 
 }
 
+  // throw res.statusText;
+  
+ 
+  
+  // if(res.ok){    
+  //   if(tasks.total_results == 0){
+  //     throw 404;
+  //   }
+  //   return tasks;
+  // }
+  // throw res.status; 
 
+  // else throw 'error';
+
+ //Man kan throw rätt status(?)kod (tex 404)) 
 
 /*********** 
  POST new task
@@ -43,6 +58,7 @@ async function postTask(task){
   const info = await res.json();
   console.log(info);
 
+
 }
 
 
@@ -58,6 +74,15 @@ async function assignNameToTask(id, assignedName){
       body: JSON.stringify(assignedName),
       headers: header
   }
+
+
+  // if (res.ok){
+  //   const tasks = await res.json();
+  //   console.log('tasks');
+  //   console.log(tasks);
+  //   return tasks;
+  // }
+  // throw res.status;
 
   const res = await fetch(url, options);
   const info = await res.json();

@@ -17,26 +17,26 @@ export function displayTasks(tasks){
   }
 }
 
+export function clearAndGetTasks(){
+  clearAll();
+  getTasks()
+    .then(displayTasks)
+    .catch(displayError)
+}
+
 function displayTask(task, id){
   const taskCard = document.createElement('article'); 
   const taskTextContainer = createAppendAddClass('div', taskCard, 'tasktext');
 
-  let section = toDoSection;
   const status = task.status; 
-  
+  let section;
   if (status == "to do"){
-    const taskAssignContainer = createAppendAddClass('div', taskCard, 'taskassign');
-    const assignForm = createAppendAddClass('form', taskAssignContainer, 'assignform');
-    const nameInput = createAppendAddClass('input', assignForm, 'assignNameInput');
-    nameInput.setAttribute("type", "text");
-    nameInput.setAttribute("name", "AssignName");
-    nameInput.setAttribute("placeholder", "Enter name");
-    nameInput.setAttribute("id", "assignName"); 
-    const  nameSubmitBtn = createAppendAddClass('button', assignForm, 'assignBtn');
-    nameSubmitBtn.innerText = 'Assign';
-  
+    section = toDoSection;
+    const assignForm = createAssignForm(taskCard);
+
     assignForm.addEventListener('submit', (event) => {
       event.preventDefault();
+      const nameInput = assignForm.querySelector('#assignName');
       const assignedName = nameInput.value.trim();
 
       const newAssignee = {
@@ -47,13 +47,9 @@ function displayTask(task, id){
       assignForm.reset();
    
       assignNameToTask(id, newAssignee)
-      .then(()=>{
-        clearAll();
-        getTasks()
-        .then(displayTasks)
-        .catch(displayError);
-      })
-
+        .then(clearAndGetTasks)
+        .catch(displayError)
+ 
     });
 
   }
@@ -61,7 +57,7 @@ function displayTask(task, id){
 
   if (status == "in progress"){
     section = inProgressSection;
-    const taskButtonContainer = createAppendAddClass('div', taskCard);
+    const taskButtonContainer = createAppendAddClass('div', taskCard, 'taskbuttonconatiner');
     const assignedToContainer = createAppendAddClass('p', taskButtonContainer, 'assigned');
     const doneBtn = createAppendAddClass('button', taskButtonContainer, 'taskBtns' );
     doneBtn.innerText = 'Done';
@@ -76,12 +72,8 @@ function displayTask(task, id){
       } 
 
       changeTaskStatus(id, newStatus)
-      .then(()=>{
-        clearAll();
-        getTasks()
-        .then(displayTasks)
-        .catch(displayError);
-      })
+        .then(clearAndGetTasks)
+        .catch(displayError)
 
     });
   }
@@ -125,6 +117,27 @@ function displayTask(task, id){
 }
 
 
+
+
+/********************************************
+   Create form (Assign)
+*********************************************/
+
+function createAssignForm(taskCard) {
+  const taskAssignContainer = createAppendAddClass('div', taskCard, 'taskassign');
+  const assignForm = createAppendAddClass('form', taskAssignContainer, 'assignform');
+  const nameInput = createAppendAddClass('input', assignForm, 'assignNameInput');
+  nameInput.setAttribute("type", "text");
+  nameInput.setAttribute("name", "AssignName");
+  nameInput.setAttribute("placeholder", "Enter name");
+  nameInput.setAttribute("id", "assignName"); 
+  const  nameSubmitBtn = createAppendAddClass('button', assignForm, 'assignBtn');
+  nameSubmitBtn.innerText = 'Assign';
+  return assignForm;
+}
+
+
+
 /********************************************
    Create/Append & Clear functions
 *********************************************/
@@ -142,6 +155,9 @@ export function clearAll (){
   toDoSection.innerHTML = '';
   inProgressSection.innerHTML = '';
   doneSection.innerHTML = '';
+
+  // const toDoChildren = document.querySelector('');
+
   const toDoHeader = createAppendAddClass('h2', toDoSection);
   toDoHeader.innerText = 'To do'; 
   const inProgressHeader = createAppendAddClass('h2', inProgressSection);
@@ -155,19 +171,14 @@ export function clearAll (){
 *********************************************/
 
 export function displayError(error) {
-  let message;
   const errorContainer = document.querySelector('#errorContainer');
   errorContainer.classList.remove('hide');
-
-  if (error === 404) { 
-    message = 'No results found. Try again.';
-  }
-  else{ 
-    message = 'Something went wrong, try again later.' 
-  }
-  
-  const errorMessage = document.querySelector('#errorMessage');
-  errorMessage.innerText = message;
+  const message = `ERROR! Server responded with ${error}.`;
+  errorContainer.innerText = message;
 
 }
+
+
+
+
 

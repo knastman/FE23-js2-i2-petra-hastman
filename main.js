@@ -1,4 +1,4 @@
-import { displayTasks, createAppendAddClass, clearAll, displayError} from "./modules/displayTasks.js";
+import { displayTasks, createAppendAddClass, clearAll, displayError, clearAndGetTasks} from "./modules/displayTasks.js";
 import { getTasks, postTask } from "./modules/fetchFunctions.js";
 
 const form = document.querySelector('#addTasksForm');
@@ -7,7 +7,7 @@ const headerEl = document.querySelector('header');
 
 getTasks()
 .then(displayTasks)
-.catch(displayError); //Funkar ej?
+.catch(displayError); 
 
 
 form.addEventListener('submit', (event) => {
@@ -23,23 +23,13 @@ form.addEventListener('submit', (event) => {
     task: task 
   }
 
-  const noCategoryMessage = createAppendAddClass('div', headerEl, 'noCategoryMessage');
-  noCategoryMessage.innerHTML = '';
-  if (category == ""){
-    noCategoryMessage.innerText = 'You have to choose a category'; //Funkar men texten försvinner inte när man väljer kategori
-  }
-  else{
-    form.reset();
-    noCategoryMessage.innerHTML = '';
-    postTask(newTask)
-    .then(()=>{
-      clearAll();
-      getTasks()
-      .then(displayTasks)
-      .catch(displayError);
-    })
-    
-  }
+  form.reset();
+  // noCategoryMessage.innerHTML = '';
+
+  postTask(newTask)
+    .then(clearAndGetTasks)
+
   
 })
+
 
