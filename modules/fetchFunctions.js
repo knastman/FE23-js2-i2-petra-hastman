@@ -37,10 +37,7 @@ async function postTask(task){
   }
 
   const res = await fetch(url, options);
-
   // const info = await res.json();
-  // console.log(info);
-
 
 }
 
@@ -58,7 +55,6 @@ async function assignNameToTask(id, assignedName){
       headers: header
   }
   const res = await fetch(url, options);
-
   // const info = await res.json();
 }
 
@@ -76,7 +72,7 @@ async function changeTaskStatus(id, status){
   }
 
   const res = await fetch(url, options);
-  const info = await res.json();
+  // const info = await res.json();
 }
 
 
@@ -91,7 +87,7 @@ async function deleteTask(id){
   }
 
   const res = await fetch(url, options);
-  const info = await res.json();
+  // const info = await res.json();
 }
 
 
