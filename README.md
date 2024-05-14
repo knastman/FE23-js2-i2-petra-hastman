@@ -7,6 +7,7 @@
 
 #### Kurs
 FE23 | Javascript 2
+---
 
 # Uppgiften
 
